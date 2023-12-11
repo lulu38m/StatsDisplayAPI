@@ -2,10 +2,13 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"io"
 	"net/http"
 )
+
+// bloquer les comptes que je ne veut pas owner -> login == "GoRoutine"
 
 type Repo struct {
 	Name     string `json:"name"`
@@ -43,5 +46,11 @@ func getRepo(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, repos)
+	result := make(map[string]int)
+
+	for _, repo := range repos {
+		result[repo.Language] += 1
+	}
+	c.JSON(http.StatusOK, result)
+	fmt.Println(result)
 }
