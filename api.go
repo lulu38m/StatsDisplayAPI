@@ -2,13 +2,12 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"io"
 	"net/http"
 )
 
-// bloquer les comptes que je ne veut pas owner -> login == "GoRoutine"
+// créer un système de pourcentage, pourcentage de langage par rapport au nombre de repo
 
 type Repo struct {
 	Name     string `json:"name"`
@@ -50,13 +49,19 @@ func langageStats(c *gin.Context) {
 	}
 
 	result := make(map[string]int)
+	var totalRepo int
+	languagePourcentage := make(map[string]int)
 
 	for _, repo := range repos {
-		if repo.Owner.Login == "GoRoutine" {
+		if repo.Owner.Login == "GoRoutine" || repo.Language == "" {
 			continue
 		}
 		result[repo.Language] += 1
+		totalRepo++
 	}
-	c.JSON(http.StatusOK, result)
-	fmt.Println(result)
+
+	for key, value := range result {
+		languagePourcentage[key] = value * 100 / totalRepo
+	}
+	c.JSON(http.StatusOK, languagePourcentage)
 }
