@@ -5,9 +5,9 @@ import (
 	"github.com/gin-gonic/gin"
 	"io"
 	"net/http"
+	"os"
+	"text/template"
 )
-
-// créer un système de pourcentage, pourcentage de langage par rapport au nombre de repo
 
 type Repo struct {
 	Name     string `json:"name"`
@@ -17,7 +17,31 @@ type Repo struct {
 	}
 }
 
+type Value struct {
+	Couleur     string
+	Pourcentage int
+}
+
 var accessToken = "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"
+var languageCouleur = map[string]string{
+	"Go":         "#00ADD8",
+	"Python":     "#3572A5",
+	"JavaScript": "#F1E05A",
+	"HTML":       "#E34C26",
+	"CSS":        "#563D7C",
+	"Shell":      "#89E051",
+	"Java":       "#B07219",
+	"PHP":        "#4F5D95",
+	"C":          "#555555",
+	"C++":        "#f34b7d",
+	"C#":         "#178600",
+	"TypeScript": "#2b7489",
+	"Ruby":       "#701516",
+	"Rust":       "#dea584",
+	"Kotlin":     "#F18E33",
+	"Swift":      "#ffac45",
+	"Svelte":     "#ff3e00",
+}
 
 func langageStats(c *gin.Context) {
 	req, err := http.NewRequest("GET", "https://api.github.com/user/repos", nil)
@@ -50,7 +74,7 @@ func langageStats(c *gin.Context) {
 
 	result := make(map[string]int)
 	var totalRepo int
-	languagePourcentage := make(map[string]int)
+	languagePourcentage := make(map[string]Value)
 
 	for _, repo := range repos {
 		if repo.Owner.Login == "GoRoutine" || repo.Language == "" {
@@ -61,7 +85,26 @@ func langageStats(c *gin.Context) {
 	}
 
 	for key, value := range result {
-		languagePourcentage[key] = value * 100 / totalRepo
+		languagePourcentage[key] = Value{
+			Couleur:     languageCouleur[key],
+			Pourcentage: value * 100 / totalRepo,
+		}
 	}
 	c.JSON(http.StatusOK, languagePourcentage)
+
+	t, err := template.New("language.svg").ParseFiles("language.svg")
+	if err != nil {
+		panic(err)
+	}
+
+	file, err := os.Create("language2.svg")
+	if err != nil {
+		panic(err)
+	}
+	defer file.Close()
+
+	err = t.Execute(file, languagePourcentage)
+	if err != nil {
+		panic(err)
+	}
 }
