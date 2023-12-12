@@ -1,13 +1,12 @@
-<svg id="ewmNb3Yfnou1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-     viewBox="0 0 300 150" shape-rendering="geometricPrecision" text-rendering="geometricPrecision"
-     style="background-color:rgba(50,1,71,0.72)">
-    <text dx="0" dy="0" font-family="&quot;ewmNb3Yfnou1:::Ubuntu&quot;" font-size="16"
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+     viewBox="0 0 350 150" width="350" height="150" style="background-color:rgba(50,1,71,0.72)" >
+    <text dx="0" dy="0" font-family="&quot;ewmNb3Yfnou1:::Ubuntu&quot;" font-size="22"
           font-weight="700" transform="translate(71.931923 30.274642)" fill="#fff" stroke-width="0">
         <tspan y="0" font-weight="700" stroke-width="0"><![CDATA[
 Most Used Languages
 ]]></tspan>
     </text>
-    <foreignObject class="node" width="300" height="150" transform="translate(0 50)">
+    <foreignObject class="node" width="350" height="150" transform="translate(0 50)">
         <body xmlns="http://www.w3.org/1999/xhtml">
             <style>
                 .chart-container {
@@ -36,7 +35,7 @@ Most Used Languages
             </style>
             <div class="chart-container">
                 {{ range $key, $value := . }}
-                <div class="chart-segment" style="background-color: {{ .Couleur }} ; flex: {{ .Pourcentage }}"></div>
+                <div class="chart-segment" style="background-color: {{ .Couleur }}; flex: {{ .Pourcentage }}"></div>
                 {{ end }}
             </div>
         </body>
@@ -49,25 +48,25 @@ Most Used Languages
              stroke-width="0" />
     <ellipse rx="4" ry="4" transform="translate(165.672648 107.681086)" fill="#e72f2f"
              stroke-width="0" />
-    <text dx="0" dy="0" font-family="&quot;ewmNb3Yfnou1:::Ubuntu&quot;" font-size="10"
+    <text dx="0" dy="0" font-family="&quot;ewmNb3Yfnou1:::Ubuntu&quot;" font-size="12"
           font-weight="400" transform="translate(174.127063 111.378166)" fill="#fff" stroke-width="0">
         <tspan y="0" font-weight="400" stroke-width="0"><![CDATA[
 Autres
 ]]></tspan>
     </text>
-    <text dx="0" dy="0" font-family="&quot;ewmNb3Yfnou1:::Ubuntu&quot;" font-size="10"
+    <text dx="0" dy="0" font-family="&quot;ewmNb3Yfnou1:::Ubuntu&quot;" font-size="12"
           font-weight="400" transform="translate(125.127063 111.378166)" fill="#fff" stroke-width="0">
         <tspan y="0" font-weight="400" stroke-width="0"><![CDATA[
 PHP
 ]]></tspan>
     </text>
-    <text dx="0" dy="0" font-family="&quot;ewmNb3Yfnou1:::Ubuntu&quot;" font-size="10"
+    <text dx="0" dy="0" font-family="&quot;ewmNb3Yfnou1:::Ubuntu&quot;" font-size="12"
           font-weight="400" transform="translate(22.090546 110.645711)" fill="#fff" stroke-width="0">
         <tspan y="0" font-weight="400" stroke-width="0"><![CDATA[
 Svelte
 ]]></tspan>
     </text>
-    <text dx="0" dy="0" font-family="&quot;ewmNb3Yfnou1:::Ubuntu&quot;" font-size="10"
+    <text dx="0" dy="0" font-family="&quot;ewmNb3Yfnou1:::Ubuntu&quot;" font-size="12"
           font-weight="400" transform="translate(81.079418 111.378166)" fill="#fff" stroke-width="0">
         <tspan y="0" font-weight="400" stroke-width="0"><![CDATA[
 Go

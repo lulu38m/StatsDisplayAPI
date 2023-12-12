@@ -5,7 +5,6 @@ import (
 	"github.com/gin-gonic/gin"
 	"io"
 	"net/http"
-	"os"
 	"text/template"
 )
 
@@ -90,21 +89,17 @@ func langageStats(c *gin.Context) {
 			Pourcentage: value * 100 / totalRepo,
 		}
 	}
-	c.JSON(http.StatusOK, languagePourcentage)
 
 	t, err := template.New("language.svg").ParseFiles("language.svg")
 	if err != nil {
-		panic(err)
+		c.JSON(http.StatusInternalServerError, gin.H{"error": " Erreur lors de la lecture du fichier language.svg"})
+		return
 	}
 
-	file, err := os.Create("language2.svg")
+	c.Writer.Header().Set("Content-Type", "image/svg+xml")
+	err = t.Execute(c.Writer, languagePourcentage)
 	if err != nil {
-		panic(err)
-	}
-	defer file.Close()
-
-	err = t.Execute(file, languagePourcentage)
-	if err != nil {
-		panic(err)
+		c.JSON(http.StatusInternalServerError, gin.H{"error": " Erreur lors de l'execution du template"})
+		return
 	}
 }
