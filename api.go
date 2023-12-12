@@ -20,7 +20,7 @@ type Repo struct {
 
 var accessToken = "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"
 
-func contributionStats(c *gin.Context) {
+func langageStats(c *gin.Context) {
 	req, err := http.NewRequest("GET", "https://api.github.com/user/repos", nil)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Erreur lors de la création de la requête"})

@@ -7,7 +7,7 @@ import (
 func main() {
 	router := gin.Default()
 
-	router.GET("/stats/contributions", contributionStats)
+	router.GET("/stats/contributions", langageStats)
 
 	router.Run("localhost:8080")
 }
