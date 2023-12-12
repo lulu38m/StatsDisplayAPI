@@ -13,11 +13,14 @@ import (
 type Repo struct {
 	Name     string `json:"name"`
 	Language string `json:"language"`
+	Owner    struct {
+		Login string `json:"login"`
+	}
 }
 
 var accessToken = "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"
 
-func getRepo(c *gin.Context) {
+func contributionStats(c *gin.Context) {
 	req, err := http.NewRequest("GET", "https://api.github.com/user/repos", nil)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Erreur lors de la création de la requête"})
@@ -49,6 +52,9 @@ func getRepo(c *gin.Context) {
 	result := make(map[string]int)
 
 	for _, repo := range repos {
+		if repo.Owner.Login == "GoRoutine" {
+			continue
+		}
 		result[repo.Language] += 1
 	}
 	c.JSON(http.StatusOK, result)
