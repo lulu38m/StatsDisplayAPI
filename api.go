@@ -19,6 +19,7 @@ type Repo struct {
 type Value struct {
 	Couleur     string
 	Pourcentage int
+	Nom         string
 }
 
 var accessToken = "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"
@@ -30,7 +31,7 @@ var languageCouleur = map[string]string{
 	"CSS":        "#563D7C",
 	"Shell":      "#89E051",
 	"Java":       "#B07219",
-	"PHP":        "#4F5D95",
+	"PHP":        "#a7c957",
 	"C":          "#555555",
 	"C++":        "#f34b7d",
 	"C#":         "#178600",
@@ -39,7 +40,7 @@ var languageCouleur = map[string]string{
 	"Rust":       "#dea584",
 	"Kotlin":     "#F18E33",
 	"Swift":      "#ffac45",
-	"Svelte":     "#ff3e00",
+	"Svelte":     "#ff006e",
 }
 
 func langageStats(c *gin.Context) {
@@ -87,6 +88,7 @@ func langageStats(c *gin.Context) {
 		languagePourcentage[key] = Value{
 			Couleur:     languageCouleur[key],
 			Pourcentage: value * 100 / totalRepo,
+			Nom:         key,
 		}
 	}
 
