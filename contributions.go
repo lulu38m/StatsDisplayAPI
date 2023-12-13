@@ -10,3 +10,5 @@ func contributionStats(c *gin.Context) {
 		"message": "contributionStats",
 	})
 }
+
+// voir comment faire pour recuperer les contributions de toutes les années
