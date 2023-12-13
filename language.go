@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"io"
 	"net/http"
@@ -78,7 +77,6 @@ func langageStats(c *gin.Context) {
 	var totalRepo int
 	languagePourcentage := make(map[string]Value)
 
-	// faire en sorte qu'il y ai que les 4 plus grand langage et le reste en autre
 	for _, repo := range repos {
 		if repo.Owner.Login == "GoRoutine" || repo.Language == "" {
 			continue
@@ -94,8 +92,6 @@ func langageStats(c *gin.Context) {
 			Nom:         key,
 		}
 	}
-
-	//gestion pourcentage des languages 5 max et le reste en autre
 
 	type kv struct {
 		Key   string
@@ -118,7 +114,6 @@ func langageStats(c *gin.Context) {
 		if i < maxLanguages {
 			topLanguages = append(topLanguages, kv.Value)
 			totalTopLanguages += kv.Value.Pourcentage
-			fmt.Println(kv.Key, kv.Value)
 		} else {
 			otherLanguages += kv.Value.Pourcentage
 		}
@@ -142,8 +137,7 @@ func langageStats(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": " Erreur lors de la lecture du fichier language.svg"})
 		return
 	}
-	fmt.Println(topLanguages)
-	fmt.Println(languagePourcentage)
+
 	c.Writer.Header().Set("Content-Type", "image/svg+xml")
 	err = t.Execute(c.Writer, topLanguages)
 	if err != nil {
