@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-     viewBox="0 0 350 150" width="380" height="150" style="background-color:rgba(50,1,71,0.72)">
+     viewBox="0 0 350 150" width="490" height="150" style="background-color:rgba(50,1,71,0.72)">
     <text dx="0" dy="0" font-family="&quot;ewmNb3Yfnou1:::Ubuntu&quot;" font-size="22"
           font-weight="700" transform="translate(71.931923 30.274642)" fill="#fff" stroke-width="0">
         <tspan y="0" font-weight="700" stroke-width="0"><![CDATA[
@@ -40,13 +40,14 @@ Most Used Languages
             </div>
         </body>
     </foreignObject>
-    <foreignObject class="node" width="375" height="150" transform="translate(0 92)">
+    <foreignObject class="node" width="400" height="150" transform="translate(0 92)">
     <body xmlns="http://www.w3.org/1999/xhtml">
     <style>
         .language-container {
         display: flex;
         color: white;
         gap: 10px;
+        width: 100%;
         }
         .language-color {
         width: 10px;
