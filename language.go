@@ -2,9 +2,11 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"io"
 	"net/http"
+	"sort"
 	"text/template"
 )
 
@@ -76,6 +78,7 @@ func langageStats(c *gin.Context) {
 	var totalRepo int
 	languagePourcentage := make(map[string]Value)
 
+	// faire en sorte qu'il y ai que les 4 plus grand langage et le reste en autre
 	for _, repo := range repos {
 		if repo.Owner.Login == "GoRoutine" || repo.Language == "" {
 			continue
@@ -92,14 +95,57 @@ func langageStats(c *gin.Context) {
 		}
 	}
 
+	//gestion pourcentage des languages 5 max et le reste en autre
+
+	type kv struct {
+		Key   string
+		Value Value
+	}
+	var value []kv
+	for lang, count := range languagePourcentage {
+		value = append(value, kv{lang, count})
+	}
+	sort.Slice(value, func(i, j int) bool {
+		return value[i].Value.Pourcentage > value[j].Value.Pourcentage
+	})
+
+	const maxLanguages = 3
+	var totalTopLanguages int
+	topLanguages := make([]Value, 0)
+	otherLanguages := 0
+
+	for i, kv := range value {
+		if i < maxLanguages {
+			topLanguages = append(topLanguages, kv.Value)
+			totalTopLanguages += kv.Value.Pourcentage
+			fmt.Println(kv.Key, kv.Value)
+		} else {
+			otherLanguages += kv.Value.Pourcentage
+		}
+	}
+
+	if len(value) > maxLanguages {
+		topLanguages = append(topLanguages, Value{
+			Couleur:     "#FFF",
+			Pourcentage: otherLanguages,
+			Nom:         "Autre",
+		})
+	} else {
+		for _, kv := range value {
+			topLanguages = append(topLanguages, kv.Value)
+			totalTopLanguages += kv.Value.Pourcentage
+		}
+	}
+
 	t, err := template.New("language.svg").ParseFiles("language.svg")
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": " Erreur lors de la lecture du fichier language.svg"})
 		return
 	}
-
+	fmt.Println(topLanguages)
+	fmt.Println(languagePourcentage)
 	c.Writer.Header().Set("Content-Type", "image/svg+xml")
-	err = t.Execute(c.Writer, languagePourcentage)
+	err = t.Execute(c.Writer, topLanguages)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": " Erreur lors de l'execution du template"})
 		return
