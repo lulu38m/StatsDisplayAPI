@@ -47,6 +47,13 @@ func contributionStats(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Erreur lors du parsing de la réponse de l'API GitHub"})
 		return
 	}
-}
 
-// voir comment faire pour recuperer les contributions de toutes les années
+	var contributions Contributions
+	err = json.Unmarshal(body, &contributions)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Erreur lors du parsing de la réponse de l'API GitHub"})
+		return
+	}
+
+	c.JSON(http.StatusOK, contributions)
+}
