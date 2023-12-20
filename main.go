@@ -10,5 +10,5 @@ func main() {
 	router.GET("/stats/language", langageStats)
 	router.GET("/stats/contributions", contributionStats)
 
-	router.Run("localhost:8080")
+	router.Run(":8080")
 }
