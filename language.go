@@ -5,6 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"io"
 	"net/http"
+	"os"
 	"sort"
 	"text/template"
 )
@@ -23,7 +24,7 @@ type Value struct {
 	Nom         string
 }
 
-var accessToken = "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"
+var accessToken = os.Getenv("GITHUB_TOKEN")
 var languageCouleur = map[string]string{
 	"Go":         "#00ADD8",
 	"Python":     "#3572A5",
@@ -45,6 +46,7 @@ var languageCouleur = map[string]string{
 }
 
 func langageStats(c *gin.Context) {
+
 	req, err := http.NewRequest("GET", "https://api.github.com/user/repos", nil)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Erreur lors de la création de la requête"})
