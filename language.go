@@ -24,7 +24,7 @@ type Value struct {
 	Nom         string
 }
 
-var accessToken = os.Getenv("GITHUB_TOKEN") // Get the GitHub token from the environment variables
+var accessToken = os.Getenv("GITHUB_TOKEN")
 var languageCouleur = map[string]string{
 	"Go":         "#00ADD8",
 	"Python":     "#3572A5",
