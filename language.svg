@@ -1,4 +1,3 @@
- @import url('https://fonts.googleapis.com/css2?family=Itim&amp;family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,900;1,500&amp;display=swap');
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
      viewBox="0 0 350 150" width="490" height="150" style="background-color:rgba(50,1,71,0.72)">
     <text dx="0" dy="0" font-size="22"
@@ -9,7 +8,7 @@ Most Used Languages
     </text>
     <foreignObject class="node" width="350" height="150" transform="translate(0 50)">
         <body xmlns="http://www.w3.org/1999/xhtml">
-             
+              @import url('https://fonts.googleapis.com/css2?family=Itim&amp;family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,900;1,500&amp;display=swap');
             <style>
                 svg {
                 font-family: 'Roboto', sans-serif;
