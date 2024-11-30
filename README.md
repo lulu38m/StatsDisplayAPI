@@ -7,7 +7,7 @@
 <body class="bg-gray-100 text-gray-800 font-sans leading-relaxed">
 
   <header class="bg-gray-800 text-white py-6 text-center">
-    <h1 class="text-3xl font-bold">GitHub Language Stats API</h1>
+    <h1 class="text-3xl font-bold">GitHub Stats View</h1>
     <p class="mt-2 text-lg">A Go API to display statistics of languages used in your GitHub repositories.</p>
   </header>
 
